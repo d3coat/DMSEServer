@@ -41,3 +41,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.class
+sqlite-jdbc-3.8.7.jar
+DMSEDB.db
+*.classpath
