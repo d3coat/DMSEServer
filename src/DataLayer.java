@@ -15,7 +15,7 @@ public class DataLayer {
 			Connection c = DriverManager.getConnection("jdbc:sqlite:"+database);
 			c.setAutoCommit(false);
 
-			String sql = "INSERT INTO messages(username,message) VALUES (?,?);";
+			String sql = "INSERT INTO messages(userID,message) VALUES (((SELECT userID FROM users WHERE username=?)),?);";
 
 			PreparedStatement pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, receiver);
@@ -41,7 +41,7 @@ public class DataLayer {
 			Connection c = DriverManager.getConnection("jdbc:sqlite:"+database);
 			c.setAutoCommit(false);
 
-			String sql = "SELECT message FROM messages WHERE username = ? ORDER BY msgtime;";
+			String sql = "SELECT message FROM messages JOIN users ON messages.userID=users.userID WHERE users.username = ? ORDER BY msgtime;";
 
 			PreparedStatement pstmt = c.prepareStatement(sql);
 			pstmt.setString(1, receiver);
